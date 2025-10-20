@@ -1,0 +1,142 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3em;
+    color: #ffc107;
+    text-shadow: 0 0 10px #ffc107, 0 0 20px #ffc107;
+}
+
+#nameInput {
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 300px;
+    max-width: 80%;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ffc107;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffde7a;
+}
+
+.fireworks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.firework {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #ffc107;
+    border-radius: 50%;
+    opacity: 0;
+    animation: firework-animation 1.5s ease-out forwards;
+}
+
+@keyframes firework-animation {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-200px) scale(0);
+        opacity: 0;
+    }
+}
+
+.greeting {
+    padding-top: 200px;
+    opacity: 0;
+    animation: greeting 1s ease-in-out forwards 1s;
+    position: relative;
+    z-index: 10;
+}
+
+.wishes-page .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.wishes-page .video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wishes-page .greeting-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    z-index: 10;
+}
+
+.wishes-page .greeting {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+#randomWish {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #eee;
+}
+
+
+#diwaliGreeting {
+    font-size: 2.5em;
+    color: #ffc107;
+    text-shadow: 0 0 10px #ffc107, 0 0 20px #ffc107;
+}
+
+@keyframes greeting {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
