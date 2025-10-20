@@ -4,12 +4,28 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const port = 3000;
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 const visitorsFilePath = path.join(__dirname, 'visitors.json');
+
+// Endpoint to serve the admin page
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
+// Endpoint to get visitor data
+app.get('/api/visitors', (req, res) => {
+    fs.readFile(visitorsFilePath, 'utf8', (err, data) => {
+        if (err && err.code !== 'ENOENT') {
+            console.error(err);
+            return res.status(500).send({ message: 'Error reading visitors file' });
+        }
+        const visitors = data ? JSON.parse(data) : [];
+        res.json(visitors);
+    });
+});
 
 // Endpoint to save visitor's name
 app.post('/api/visitor', (req, res) => {

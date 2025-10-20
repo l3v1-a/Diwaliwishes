@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Visitor List</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 800px; margin: 50px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        #password-prompt { text-align: center; }
+        #password-prompt input { padding: 10px; margin-right: 10px; }
+        #password-prompt button { padding: 10px 20px; }
+        #visitor-data { display: none; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Visitor List</h1>
+        <div id="password-prompt">
+            <input type="password" id="password" placeholder="Enter password">
+            <button onclick="checkPassword()">Submit</button>
+        </div>
+        <div id="visitor-data">
+            <table>
+                <thead>
+                    <tr>
+                        <th>IP Address</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody id="visitor-table-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === 'levi@6656') {
+                document.getElementById('password-prompt').style.display = 'none';
+                document.getElementById('visitor-data').style.display = 'block';
+                fetchVisitors();
+            } else {
+                alert('Incorrect password.');
+            }
+        }
+
+        function fetchVisitors() {
+            fetch('/api/visitors')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('visitor-table-body');
+                    tableBody.innerHTML = '';
+                    data.forEach(visitor => {
+                        const row = `<tr>
+                            <td>${visitor.ip}</td>
+                            <td>${new Date(visitor.timestamp).toLocaleString()}</td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Error fetching visitors:', error));
+        }
+    </script>
+</body>
+</html>
