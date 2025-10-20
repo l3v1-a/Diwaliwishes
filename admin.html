@@ -27,6 +27,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Name</th>
                         <th>IP Address</th>
                         <th>Timestamp</th>
                     </tr>
@@ -57,6 +58,7 @@
                     tableBody.innerHTML = '';
                     data.forEach(visitor => {
                         const row = `<tr>
+                            <td>${visitor.name}</td>
                             <td>${visitor.ip}</td>
                             <td>${new Date(visitor.timestamp).toLocaleString()}</td>
                         </tr>`;

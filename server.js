@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
+app.set('trust proxy', true);
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
@@ -41,7 +42,7 @@ app.post('/api/visitor', (req, res) => {
         }
 
         const visitors = data ? JSON.parse(data) : [];
-        visitors.push({ name, timestamp: new Date().toISOString() });
+        visitors.push({ name, ip: req.ip, timestamp: new Date().toISOString() });
 
         fs.writeFile(visitorsFilePath, JSON.stringify(visitors, null, 2), (err) => {
             if (err) {
